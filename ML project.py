@@ -64,7 +64,7 @@ history = model.fit(train_data,
                     callbacks=[reduce_lr, early_stopping])
 
 # Save the model
-model.save('optimized_shoe_classification_model.h5')
+model.save('optimized_shoe_classification_model')
 
 # Test the model
 test_loss, test_accuracy = model.evaluate(validation_data)

@@ -4,10 +4,12 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Flatten, Dense, Dropout, BatchNormalization
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.callbacks import ReduceLROnPlateau, EarlyStopping
+import os
 
 # Define dataset paths
 train_data_path = 'C:/Users/User/Downloads/Nike_Adidas_converse_Shoes_image_dataset/Nike_Adidas_converse_Shoes_image_dataset/train'
-validation_data_path = 'C:/Users/User/Downloads/Nike_Adidas_converse_Shoes_image_dataset/Nike_Adidas_converse_Shoes_image_dataset/unseen_validate'
+validation_data_path = 'C:/Users/User/Downloads/Nike_Adidas_converse_Shoes_image_dataset/Nike_Adidas_converse_Shoes_image_dataset/validate'
+
 
 # Data preprocessing with enhanced augmentation
 train_datagen = ImageDataGenerator(rescale=1./255,
@@ -64,7 +66,8 @@ history = model.fit(train_data,
                     callbacks=[reduce_lr, early_stopping])
 
 # Save the model
-model.save('optimized_shoe_classification_model')
+print("Current Working Directory:", os.getcwd())
+model.save('optimized_shoe_classification_model.h5', save_format='h5')
 
 # Test the model
 test_loss, test_accuracy = model.evaluate(validation_data)
